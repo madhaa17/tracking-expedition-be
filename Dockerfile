@@ -12,7 +12,7 @@ RUN npx prisma generate
 
 COPY . .
 
-RUN npm run seed
+RUN bash -c "set -a && source .env && npm run seed"
 
 RUN npm run build
 
