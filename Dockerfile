@@ -10,9 +10,9 @@ COPY prisma ./prisma
 
 RUN npx prisma generate
 
-RUN npm seed
-
 COPY . .
+
+RUN npm run seed
 
 RUN npm run build
 
