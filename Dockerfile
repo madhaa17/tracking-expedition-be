@@ -10,6 +10,8 @@ COPY prisma ./prisma
 
 RUN npx prisma generate
 
+COPY .env .env
+
 COPY . .
 
 RUN bash -c "set -a && source .env && npm run seed"
