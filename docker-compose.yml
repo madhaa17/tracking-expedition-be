@@ -66,7 +66,7 @@ services:
             - redis
         networks:
             - kirim-aja-network
-        command: RUN bash -c "set -a && source .env && npm run seed"
+        command: bash -c "sleep 10 && npm run seed && npm run start:prod"
 
 volumes:
     mysql_data:
