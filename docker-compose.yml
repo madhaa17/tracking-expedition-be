@@ -53,7 +53,7 @@ services:
             - mysql
         networks:
             - kirim-aja-network
-    backend:
+    kirim-aja-backend:
         build: .
         container_name: kirim-aja-backend
         restart: unless-stopped
@@ -64,8 +64,6 @@ services:
         depends_on:
             - mysql
             - redis
-        volumes:
-            - .:/usr/src/app
         networks:
             - kirim-aja-network
 
