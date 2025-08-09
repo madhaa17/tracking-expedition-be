@@ -1,5 +1,5 @@
+version: '3.8'
 services:
-    # MySQL Database
     mysql:
         image: mysql:8.0
         container_name: mysql
@@ -20,7 +20,6 @@ services:
             timeout: 20s
             retries: 10
 
-    # Redis for Caching and Queue
     redis:
         image: redis:latest
         container_name: redis
@@ -36,7 +35,7 @@ services:
             interval: 10s
             timeout: 5s
             retries: 5
-    # phpMyAdmin (Optional - MySQL GUI)
+
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
         container_name: phpmyadmin
@@ -53,25 +52,10 @@ services:
             - mysql
         networks:
             - kirim-aja-network
-    kirim-aja-backend:
-        build: .
-        container_name: kirim-aja-backend
-        restart: unless-stopped
-        env_file:
-            - .env
-        ports:
-            - '3000:3000'
-        depends_on:
-            - mysql
-            - redis
-        networks:
-            - kirim-aja-network
 
 volumes:
     mysql_data:
-        driver: local
     redis_data:
-        driver: local
 
 networks:
     kirim-aja-network:
