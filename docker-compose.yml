@@ -1,4 +1,5 @@
 version: '3.8'
+
 services:
     mysql:
         image: mysql:8.0
@@ -45,11 +46,26 @@ services:
             PMA_PORT: 3306
             PMA_USER: kirim_aja_user
             PMA_PASSWORD: kirim_aja_password
-            MYSQL_ROOT_PASSWORD: rootpassword
         ports:
             - '8080:80'
         depends_on:
             - mysql
+        networks:
+            - kirim-aja-network
+
+    myapp:
+        image: mikamada17/myapp:latest
+        container_name: myapp
+        restart: unless-stopped
+        depends_on:
+            mysql:
+                condition: service_healthy
+            redis:
+                condition: service_healthy
+        ports:
+            - '3000:3000'
+        env_file:
+            - .env
         networks:
             - kirim-aja-network
 
