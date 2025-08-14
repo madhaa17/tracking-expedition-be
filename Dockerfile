@@ -6,6 +6,10 @@ COPY package*.json ./
 RUN npm ci && npm cache clean --force 
 
 COPY . .
+
+# Tambahkan generate prisma client sebelum build
+RUN npx prisma generate
+
 RUN npm run build
 
 RUN npm prune --production 
