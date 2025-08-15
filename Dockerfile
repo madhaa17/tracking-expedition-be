@@ -8,7 +8,7 @@ RUN npm ci && npm cache clean --force
 COPY . .
 
 # Tambahkan generate prisma client sebelum build
-RUN npx prisma generate
+RUN npx prisma generate --schema=prisma/schema.prisma
 
 RUN npm run build
 
